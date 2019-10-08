@@ -1,0 +1,26 @@
+TXID = 0x7e0
+RXID = 0x7e8
+TXPADSIZE = 8
+RXPADSIZE = 8
+SECURITY_LEVEL = 2
+
+def PriusKeyAlgo(seed, params):
+    output_key = bytearray(seed)
+    xorkey = bytearray(params['xorkey'])
+    for i in range(len(seed)):
+        output_key[i] = seed[i] ^ xorkey[i%len(xorkey)]
+        
+    return bytes(output_key)
+
+
+car_client_config  = {
+    'exception_on_negative_response'	: True,	
+    'exception_on_invalid_response'		: False,
+    'exception_on_unexpected_response'	: True,
+    'security_algo'				: PriusKeyAlgo,
+    
+    # Please refer to the URL and change '\xXX\xXX\xXX\xXX' to the PriusEffectiveKey value
+    # https://github.com/andrewraharjo/CAN-Bus-Hack_Prius_Focus/blob/master/ecomcat_api/config.py
+
+    'security_algo_params'		: dict(xorkey=b'\xXX\xXX\xXX\xXX')
+}
