@@ -28,8 +28,15 @@ if __name__ == '__main__':
     with Client(conn, request_timeout=2, config=CarConfig.car_client_config) as client:
         try:
             client.change_session(DiagnosticSessionControl.Session.defaultSession)
+            client.change_session(0x61)   
+
             client.unlock_security_access(CarConfig.SECURITY_LEVEL)
-            client.change_session(DiagnosticSessionControl.Session.programmingSession)   
+            
+            for cnt in range(0x11, 0xff - 0x11):
+                conn.send(b"\x3e\x01")
+                payload = conn.wait_frame(timeout=0.1)
+                conn.send(cnt.to_bytes(1, "little") + b"\x01")
+                payload = conn.wait_frame(timeout=0.1)
 
         except NegativeResponseException as e:
             print('Server refused our request for service %s with code "%s" (0x%02x)' % (e.response.service.get_name(), e.response.code_name, e.response.code))
