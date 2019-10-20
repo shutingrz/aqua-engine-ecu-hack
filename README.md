@@ -1,4 +1,6 @@
 # AQUA ENGINE ECU HACK TOOL
+![aqua_ecm](aqua_ecm_image.png)
+
 Tool created to hack Aqua ECM (Engine Control Module).  
 
 If you have any comments or questions please do it on Twitter DM (@shutingrz).  
