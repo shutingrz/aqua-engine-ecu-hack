@@ -14,9 +14,9 @@ def PriusKeyAlgo(seed, params):
 
 
 car_client_config  = {
-    'exception_on_negative_response'	: True,	
+    'exception_on_negative_response'	: False,	
     'exception_on_invalid_response'		: False,
-    'exception_on_unexpected_response'	: True,
+    'exception_on_unexpected_response'	: False,
     'security_algo'				: PriusKeyAlgo,
     
     # Please refer to the URL and change '\xXX\xXX\xXX\xXX' to the PriusEffectiveKey value
