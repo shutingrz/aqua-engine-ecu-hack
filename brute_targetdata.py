@@ -29,6 +29,12 @@ if __name__ == '__main__':
         try:
             client.change_session(DiagnosticSessionControl.Session.defaultSession)
             client.unlock_security_access(CarConfig.SECURITY_LEVEL)
+
+            # suppress error
+            for i in range(0,3):
+                conn.send(b'\x0a\x27')
+                time.sleep(0.5)
+
             client.change_session(DiagnosticSessionControl.Session.programmingSession)   
 
         except NegativeResponseException as e:
@@ -44,10 +50,16 @@ if __name__ == '__main__':
 
     with Client(conn2, request_timeout=2, config=CarConfig.car_client_config) as client:
         try:
+            # programming session enable test
+            for i in range(0,2):
+                conn2.send(b'\x00')
+                conn2.wait_frame(timeout=0.5)
+            
+            # switch canid for programming
             conn2.send(b'\x20\x07\x01\x00\x02\x00')
-            conn2.wait_frame(timeout=0.04)
+            conn2.wait_frame(timeout=0.5)
             conn2.send(b'\x07\x00')
-            conn2.wait_frame(timeout=0.04)
+            conn2.wait_frame(timeout=0.5)
 
             before_time = time.time()
             for cnt in range(0, 0xffffffff):
