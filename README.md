@@ -3,7 +3,7 @@
 
 Tool created to hack Aqua ECM (Engine Control Module).  
 
-If you have any comments or questions please do it on Twitter DM (@shutingrz).  
+Please contact me at Twitter mention or DM (@shutingrz) for any questions or comments.
 https://twitter.com/shutingrz
 
 ## TargetECU
