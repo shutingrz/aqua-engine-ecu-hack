@@ -32,7 +32,7 @@ class CrackSecurityAccess():
 
         momentTimeSeed = []
         etaTime = "-"
-        for xor_cand in range(0x00605ff0, 0xffffffff):
+        for xor_cand in range(0x0, 0xffffffff):
             
             seed = self.__getSeed()
             if seed is None:
